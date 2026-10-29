@@ -42,6 +42,16 @@ func (s *fakeStore) ListBySandbox(_ context.Context, sandboxID string) ([]Operat
 	return out, nil
 }
 
+func (s *fakeStore) ListUnfinished(_ context.Context) ([]Operation, error) {
+	var out []Operation
+	for _, op := range s.items {
+		if op.State == Pending || op.State == Running {
+			out = append(out, op)
+		}
+	}
+	return out, nil
+}
+
 func (s *fakeStore) Update(_ context.Context, op Operation) error {
 	if _, ok := s.items[op.ID]; !ok {
 		return core.ErrNotFound

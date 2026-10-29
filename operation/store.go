@@ -7,5 +7,6 @@ type Store interface {
 	Create(ctx context.Context, op Operation) error
 	Get(ctx context.Context, id string) (Operation, error)
 	ListBySandbox(ctx context.Context, sandboxID string) ([]Operation, error)
+	ListUnfinished(ctx context.Context) ([]Operation, error)
 	Update(ctx context.Context, op Operation) error
 }
