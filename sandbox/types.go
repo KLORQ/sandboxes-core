@@ -15,9 +15,10 @@ type NetworkRule struct {
 
 // Meta is non-lifecycle sandbox metadata.
 type Meta struct {
-	Agent      string
-	Detached   bool
-	LastUsedAt time.Time
+	Agent         string
+	Detached      bool
+	PolicyProfile string
+	LastUsedAt    time.Time
 }
 
 // NetworkPolicy is the create-time allow/deny policy snapshot.
