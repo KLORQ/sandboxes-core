@@ -6,6 +6,39 @@ import (
 	"time"
 )
 
+// NetworkRule is a CIDR/protocol/port egress rule.
+type NetworkRule struct {
+	Protocol string
+	CIDR     string
+	Port     uint16
+}
+
+// Meta is non-lifecycle sandbox metadata.
+type Meta struct {
+	Agent      string
+	Detached   bool
+	LastUsedAt time.Time
+}
+
+// NetworkPolicy is the create-time allow/deny policy snapshot.
+type NetworkPolicy struct {
+	Allow []NetworkRule
+	Deny  []NetworkRule
+}
+
+// Port maps a host loopback port to a guest port.
+type Port struct {
+	Host     uint16
+	Guest    uint16
+	Protocol string
+}
+
+// Workspace is a host path mounted into the guest at the same absolute path.
+type Workspace struct {
+	Path     string
+	ReadOnly bool
+}
+
 // Sandbox is the durable sandbox record.
 type Sandbox struct {
 	ID         string
@@ -14,6 +47,13 @@ type Sandbox struct {
 	Generation int64
 	Image      string
 	Workspace  string
+	Workspaces []Workspace
+	Ports      []Port
+	Policy     *NetworkPolicy
+	Meta       *Meta
+	CPUs       uint32
+	MemoryMiB  uint32
+	StoppedAt  time.Time
 	Error      string
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
