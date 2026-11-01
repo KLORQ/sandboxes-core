@@ -27,11 +27,12 @@ type NetworkPolicy struct {
 	Deny  []NetworkRule
 }
 
-// Port maps a host loopback port to a guest port.
+// Port maps a host loopback address/port to a guest port.
 type Port struct {
 	Host     uint16
 	Guest    uint16
 	Protocol string
+	HostIP   string
 }
 
 // Workspace is a host path mounted into the guest at the same absolute path.
