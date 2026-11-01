@@ -6,11 +6,14 @@ import (
 	"time"
 )
 
-// NetworkRule is a CIDR/protocol/port egress rule.
+// NetworkRule is a CIDR or domain/protocol/port egress rule. Domain and CIDR
+// are mutually exclusive.
 type NetworkRule struct {
 	Protocol string
 	CIDR     string
 	Port     uint16
+	Domain   string
+	RuleID   string
 }
 
 // Meta is non-lifecycle sandbox metadata.
